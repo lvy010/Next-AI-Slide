@@ -2,7 +2,31 @@
 
 ## Getting Started
 
-First, run the development server:
+AI-powered Slidev Markdown generator. Turn natural language prompts into Slidev slides with copy/download support.
+
+![Example](./src/png/example.png)
+
+## Quick Start
+
+### 1) Install dependencies
+
+```bash
+npm install
+```
+
+### 2) Configure environment variables (optional)
+
+Create `.env.local` and set:
+
+```bash
+OPENAI_API_KEY=你的 OpenAI Key
+OPENAI_MODEL=gpt-4o-mini
+OPENAI_BASE_URL=https://api.openai.com/v1
+```
+
+If no key is set, the API returns a local fallback template.
+
+### 3) Run the dev server
 
 ```bash
 npm run dev
