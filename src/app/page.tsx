@@ -1,4 +1,90 @@
-import Image from "next/image";
+"use client";
+
+import { useMemo, useState } from "react";
+
+type GenerateRequest = {
+  topic: string;
+  audience: string;
+  tone: string;
+  slideCount: number;
+  language: string;
+  theme: string;
+  includeCode: boolean;
+  includeMermaid: boolean;
+};
+
+const copy = {
+  "zh-CN": {
+    title: "Next AI Slide",
+    subtitle: "将自然语言转为 Slidev Markdown",
+    langToggle: "中 / EN",
+    configTitle: "AI 生成配置",
+    example: "使用示例",
+    promptLabel: "主题/需求描述",
+    promptPlaceholder: "例如：AI 驱动的年度战略汇报",
+    audienceLabel: "受众",
+    toneLabel: "语气/风格",
+    slideCountLabel: "页数",
+    languageLabel: "语言",
+    themeLabel: "主题模板",
+    themePlaceholder: "例如：seriph / apple-basic",
+    preferenceLabel: "内容偏好",
+    includeCode: "代码片段",
+    includeMermaid: "Mermaid 图表",
+    generate: "生成 Slidev Markdown",
+    generating: "生成中...",
+    randomExample: "随机示例",
+    previewTitle: "Slidev 预览",
+    copy: "复制",
+    download: "下载 .md",
+    previewPlaceholder: "生成后的 Slidev Markdown 将显示在这里，支持直接复制或下载。",
+    previewHint: "可以将生成内容保存为 slides.md，然后用 Slidev CLI 预览。",
+    fallback:
+      "未检测到 AI Key，已返回本地模板示例。设置 OPENAI_API_KEY 可启用真实模型生成。",
+  },
+  "en-US": {
+    title: "Next AI Slide",
+    subtitle: "Turn prompts into Slidev Markdown",
+    langToggle: "中 / EN",
+    configTitle: "AI Generation",
+    example: "Use Example",
+    promptLabel: "Topic / Prompt",
+    promptPlaceholder: "e.g. AI-driven annual strategy briefing",
+    audienceLabel: "Audience",
+    toneLabel: "Tone / Style",
+    slideCountLabel: "Slides",
+    languageLabel: "Language",
+    themeLabel: "Theme",
+    themePlaceholder: "e.g. seriph / apple-basic",
+    preferenceLabel: "Preferences",
+    includeCode: "Code blocks",
+    includeMermaid: "Mermaid diagrams",
+    generate: "Generate Slidev Markdown",
+    generating: "Generating...",
+    randomExample: "Random Example",
+    previewTitle: "Slidev Preview",
+    copy: "Copy",
+    download: "Download .md",
+    previewPlaceholder:
+      "Generated Slidev Markdown will appear here. Copy or download directly.",
+    previewHint: "Save as slides.md and preview with the Slidev CLI.",
+    fallback:
+      "No AI key detected. Returning a local template. Set OPENAI_API_KEY to enable real generation.",
+  },
+};
+
+const examplePrompts = {
+  "zh-CN": [
+    "用 8 页介绍 AI 助力产品经理的日常工作",
+    "向高中生解释什么是量子计算，包含 1 张流程图",
+    "公司季度复盘汇报，语气正式，包含关键指标与图表建议",
+  ],
+  "en-US": [
+    "Use 8 slides to explain how AI helps product managers daily",
+    "Explain quantum computing to high school students, include one diagram",
+    "Quarterly business review with key metrics and chart suggestions",
+  ],
+};
 
 export default function Home() {
   return (
