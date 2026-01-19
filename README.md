@@ -40,7 +40,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Main UI: `src/app/page.tsx`，API: `src/app/api/generate/route.ts`.
+Main UI: `src/app/page.tsx`, API: `src/app/api/generate/route.ts`.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
