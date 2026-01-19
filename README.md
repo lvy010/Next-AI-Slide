@@ -71,3 +71,17 @@ npm run start
    - Summarize/structure content before generating Slidev Markdown
    - Live preview via Slidev CLI
 4. Fine-tune a Slidev-specific LLM to improve PPT quality and fit
+
+Slidev is amazing — I haven’t used PowerPoint since switching to it.
+
+This AI layer can:
+- Lower the onboarding barrier and reach a broader audience
+- Speed up slide creation for everyone
+
+I hope more people can join or share ideas to help integrate this into the Slidev ecosystem so more users can benefit.
+
+> Contributions are very welcome.
+
+Appendix
+- https://github.com/slidevjs/slidev
+- https://sli.dev/
