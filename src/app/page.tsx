@@ -87,6 +87,88 @@ const examplePrompts = {
 };
 
 export default function Home() {
+  const [topic, setTopic] = useState("AI 驱动的产品发布会");
+  const [audience, setAudience] = useState("产品团队与管理层");
+  const [tone, setTone] = useState("专业、清晰、简洁");
+  const [slideCount, setSlideCount] = useState(8);
+  const [language, setLanguage] = useState("zh-CN");
+  const [theme, setTheme] = useState("default");
+  const [includeCode, setIncludeCode] = useState(true);
+  const [includeMermaid, setIncludeMermaid] = useState(true);
+  const [markdown, setMarkdown] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [usedFallback, setUsedFallback] = useState(false);
+
+  const requestPayload: GenerateRequest = useMemo(
+    () => ({
+      topic,
+      audience,
+      tone,
+      slideCount,
+      language,
+      theme,
+      includeCode,
+      includeMermaid,
+    }),
+    [
+      audience,
+      includeCode,
+      includeMermaid,
+      language,
+      slideCount,
+      theme,
+      tone,
+      topic,
+    ],
+  );
+
+  const handleGenerate = async () => {
+    setError("");
+    setIsLoading(true);
+    setUsedFallback(false);
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestPayload),
+      });
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || "生成失败，请稍后重试。");
+      }
+      const data = (await response.json()) as {
+        markdown: string;
+        usedFallback?: boolean;
+      };
+      setMarkdown(data.markdown || "");
+      setUsedFallback(Boolean(data.usedFallback));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "生成失败，请稍后重试。");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCopy = async () => {
+    if (!markdown) return;
+    await navigator.clipboard.writeText(markdown);
+  };
+
+  const handleDownload = () => {
+    if (!markdown) return;
+    const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "slides.md";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const uiText = copy[language as "zh-CN" | "en-US"] ?? copy["zh-CN"];
+  const exampleList = examplePrompts[language as "zh-CN" | "en-US"];
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
