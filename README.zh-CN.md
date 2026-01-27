@@ -2,7 +2,7 @@
 
 [English README](./README.md)
 
-AI 驱动的 Slidev Markdown 生成器。输入自然语言需求，生成 Slidev Markdown，并支持复制与下载。
+AI 驱动的 Slidev Markdown 生成器。输入自然语言需求，生成 Slidev Markdown，并支持复制与下载。with:https://github.com/slidevjs/slidev/issues/2435
 
 ## 快速开始
 
