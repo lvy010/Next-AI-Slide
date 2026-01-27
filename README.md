@@ -2,7 +2,7 @@
 
 [中文 README](./README.zh-CN.md)
 
-AI-powered Slidev Markdown generator. Turn natural language prompts into Slidev slides with copy/download support.
+AI-powered Slidev Markdown generator. Turn natural language prompts into Slidev slides with copy/download support. with:https://github.com/slidevjs/slidev/issues/2435
 
 ![Example](./src/png/example.png)
 
