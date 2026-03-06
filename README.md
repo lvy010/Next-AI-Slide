@@ -1,5 +1,11 @@
 ## Next AI Slide
 
+不要 Python，让我们用 Rust 实现跨平台高性能的 AI 推理！(🇨🇳) [Slides](https://talks.ayaka.io/nekoayaka/2025-08-09-rust-with-ai-for-better-portability)
+
+![Rust Talk Example](./png/26_3_6.png)
+
+你是否想通过文档自动化生成这样的 PPT？那就来试试 Next AI Slide 吧！（也在尝试把 Slide 构建流程开源成 skill,ing）
+
 [中文 README](./README.zh-CN.md)
 
 AI-powered Slidev Markdown generator. Turn natural language prompts into Slidev slides with copy/download support. with:https://github.com/slidevjs/slidev/issues/2435
